@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import program from 'commander';
-import parseDiff from '../parseDiff';
+import getDiff from '..';
 
 program
   .version('0.1.0')
@@ -9,4 +9,4 @@ program
   .option('-f, --format [type]', 'Output format')
   .parse(process.argv);
 
-parseDiff(program.format, program.args);
+getDiff(program.args[0], program.args[1]);
