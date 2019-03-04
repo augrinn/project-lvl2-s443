@@ -7,8 +7,7 @@ program
   .arguments('<firstConfig> <secondConfig>')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'Output format')
+  .action((firstConfig, secondConfig) => {
+    console.log(getDiff(firstConfig, secondConfig));
+  })
   .parse(process.argv);
-
-if (program.args) {
-  console.log(getDiff(program.args[0], program.args[1]));
-}
