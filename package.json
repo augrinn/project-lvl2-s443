@@ -1,6 +1,6 @@
 {
   "name": "gendiffau",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Compares two configuration files and shows a difference",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -26,7 +26,9 @@
     "url": "https://github.com/augrinn/project-lvl2-s443/issues"
   },
   "homepage": "https://github.com/augrinn/project-lvl2-s443#readme",
-  "dependencies": {},
+  "dependencies": {
+    "commander": "^2.19.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
