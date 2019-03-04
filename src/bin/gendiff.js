@@ -9,4 +9,6 @@ program
   .option('-f, --format [type]', 'Output format')
   .parse(process.argv);
 
-getDiff(program.args[0], program.args[1]);
+if (program.args) {
+  console.log(getDiff(program.args[0], program.args[1]));
+}
