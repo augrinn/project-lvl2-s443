@@ -1,17 +1,22 @@
 import getDiff from '../src';
+import fs from 'fs';
 
 test('getDiff(undefined, undefined) should return \'\'', () => {
   expect(getDiff(undefined, undefined)).toBe('');
 });
-test('getDiff(undefined, \'\\path\\to\\file.js\') should return \'\'', () => {
-  expect(getDiff(undefined, '\\path\\to\\file.js')).toBe('');
-});
-test('getDiff(\'\\path\\to\\file.js\', undefined) should return \'\'', () => {
-  expect(getDiff('\\path\\to\\file.js', undefined)).toBe('');
+test('getDiff(file) should return \'\'', () => {
+  expect(getDiff('file')).toBe('');
 });
 
-test('getDiff(\'\\path\\to\\file1.js\', \'\\path\\to\\file2.js\') should return \'\'', () => {
+const executed = fs.readFileSync('./__tests__/__fixtures__/executed.txt').toString();
+test('getDiff(file1.json, file2.json) should return not \'\'', () => {
   const pathToFile1 = './__tests__/__fixtures__/before.json';
   const pathToFile2 = './__tests__/__fixtures__/after.json';
-  expect(getDiff(`${pathToFile1}`, `${`${pathToFile2}`}`)).toBe('{ - follow: false   host: hexlet.io - proxy: 123.234.53.22 + timeout: 20 - timeout: 50 + verbose: true }');
+  expect(getDiff(`${pathToFile1}`, `${`${pathToFile2}`}`)).toBe(executed);
+});
+
+test('getDiff(file1.yml, file2.yml) should return not \'\'', () => {
+  const pathToFile1 = './__tests__/__fixtures__/before.yml';
+  const pathToFile2 = './__tests__/__fixtures__/after.yml';
+  expect(getDiff(`${pathToFile1}`, `${`${pathToFile2}`}`)).toBe(executed);
 });
