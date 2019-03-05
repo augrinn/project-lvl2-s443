@@ -1,8 +1,8 @@
 import getDiff from '../src';
 import fs from 'fs';
 
-test('getDiff(undefined, undefined) should return \'\'', () => {
-  expect(getDiff(undefined, undefined)).toBe('');
+test('getDiff() should return \'\'', () => {
+  expect(getDiff()).toBe('');
 });
 test('getDiff(file) should return \'\'', () => {
   expect(getDiff('file')).toBe('');
