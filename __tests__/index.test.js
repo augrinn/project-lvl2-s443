@@ -6,8 +6,17 @@ test("getDiff() should return ''", () => {
   expect(getDiff('file')).toBe('');
 });
 
-test("getDiff(file1.json, file2.json) should return not ''", () => {
-  const executed = fs.readFileSync('./__tests__/__fixtures__/executed.txt').toString();  
-  expect(getDiff('./__tests__/__fixtures__/before.json', './__tests__/__fixtures__/after.json')).toBe(executed);
-  expect(getDiff('./__tests__/__fixtures__/before.yml', './__tests__/__fixtures__/after.yml')).toBe(executed);
-});
+test.each([
+    ['before.json', 'after.json', 'executed.txt'], 
+    ['before.yml', 'after.yml', 'executed.txt'], 
+    ['before.ini', 'after.ini', 'executed.txt']
+  ])(
+  "getDiff(%s, %s) should return not ''",
+  (fileBefore, fileAfter, fileExpected) => {
+    const expected = fs.readFileSync(`./__tests__/__fixtures__/${fileExpected}`).toString();
+    const before = `./__tests__/__fixtures__/${fileBefore}`;
+    const after = `./__tests__/__fixtures__/${fileAfter}`;
+    const diff = getDiff(before, after);
+    expect(diff).toBe(expected);
+  },
+);
