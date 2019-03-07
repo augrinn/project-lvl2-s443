@@ -7,9 +7,9 @@ test("getDiff() should return ''", () => {
 });
 
 test.each([
-    ['before.json', 'after.json', 'executed.txt'], 
-    ['before.yml', 'after.yml', 'executed.txt'], 
-    ['before.ini', 'after.ini', 'executed.txt']
+    ['before.json', 'after.json', 'expected.txt'], 
+    ['before.yml', 'after.yml', 'expected.txt'], 
+    ['before.ini', 'after.ini', 'expected.txt'],
   ])(
   "getDiff(%s, %s) should return not ''",
   (fileBefore, fileAfter, fileExpected) => {
