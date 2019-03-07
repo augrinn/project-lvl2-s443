@@ -14,9 +14,9 @@ test.each([
   "getDiff(%s, %s) should return not ''",
   (fileBefore, fileAfter, fileExpected) => {
     const expected = fs.readFileSync(`./__tests__/__fixtures__/${fileExpected}`).toString();
-    const fileBeforeChange = `./__tests__/__fixtures__/${fileBefore}`;
-    const fileAfterChange = `./__tests__/__fixtures__/${fileAfter}`;
-    const diff = getDiff(fileBeforeChange, fileAfterChange);
+    const pathToFileBeforeChange = `./__tests__/__fixtures__/${fileBefore}`;
+    const pathToFileAfterChange = `./__tests__/__fixtures__/${fileAfter}`;
+    const diff = getDiff(pathToFileBeforeChange, pathToFileAfterChange);
     expect(diff).toBe(expected);
   },
 );
