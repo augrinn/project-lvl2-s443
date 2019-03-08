@@ -12,11 +12,11 @@ test.each([
     ['before.ini', 'after.ini', 'expected.txt'],
   ])(
   "getDiff(%s, %s) should return not ''",
-  (fileBefore, fileAfter, fileExpected) => {
-    const expected = fs.readFileSync(`./__tests__/__fixtures__/${fileExpected}`).toString();
-    const pathToFileBeforeChange = `./__tests__/__fixtures__/${fileBefore}`;
-    const pathToFileAfterChange = `./__tests__/__fixtures__/${fileAfter}`;
-    const diff = getDiff(pathToFileBeforeChange, pathToFileAfterChange);
+  (pathToFileBefore, pathToFileAfter, pathToFileExpected) => {
+    const expected = fs.readFileSync(`./__tests__/__fixtures__/${pathToFileExpected}`).toString();
+    const fullPathToFileBefore = `./__tests__/__fixtures__/${pathToFileBefore}`;
+    const fullPathToFileAfter = `./__tests__/__fixtures__/${pathToFileAfter}`;
+    const diff = getDiff(fullPathToFileBefore, fullPathToFileAfter);
     expect(diff).toBe(expected);
   },
 );
