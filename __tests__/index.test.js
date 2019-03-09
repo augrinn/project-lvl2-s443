@@ -7,16 +7,19 @@ test("getDiff() should return ''", () => {
 });
 
 test.each([
-    ['before.json', 'after.json', 'expected.txt'], 
-    ['before.yml', 'after.yml', 'expected.txt'], 
-    ['before.ini', 'after.ini', 'expected.txt'],
+    ['before.json', 'after.json', 'default', 'expected.txt'], 
+    ['before.yml', 'after.yml', 'default', 'expected.txt'], 
+    ['before.ini', 'after.ini', 'default', 'expected.txt'],
+    ['before.json', 'after.json', 'plain', 'expectedPlain.txt'], 
+    ['before.yml', 'after.yml', 'plain', 'expectedPlain.txt'], 
+    ['before.ini', 'after.ini', 'plain', 'expectedPlain.txt'],
   ])(
-  "getDiff(%s, %s) should return not ''",
-  (pathToFileBefore, pathToFileAfter, pathToFileExpected) => {
+  "getDiff(%s, %s, %s) should return not ''",
+  (pathToFileBefore, pathToFileAfter, outputFormat, pathToFileExpected) => {
     const expected = fs.readFileSync(`./__tests__/__fixtures__/${pathToFileExpected}`).toString();
     const fullPathToFileBefore = `./__tests__/__fixtures__/${pathToFileBefore}`;
     const fullPathToFileAfter = `./__tests__/__fixtures__/${pathToFileAfter}`;
-    const diff = getDiff(fullPathToFileBefore, fullPathToFileAfter);
+    const diff = getDiff(fullPathToFileBefore, fullPathToFileAfter, outputFormat);
     expect(diff).toBe(expected);
   },
 );

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
 import parse from './parsers';
-import render from './render';
+import render from './renders';
 
 const getDiffAst = (data1, data2) => {
   const keys = _.union(Object.keys(data1), Object.keys(data2)).sort();
@@ -19,11 +19,16 @@ const getDiffAst = (data1, data2) => {
     if (data1[key] === data2[key]) {
       return [...acc, { key, type: 'unchanged', currentValue: data1[key] }];
     }
-    return [...acc, { key, type: 'updated', oldValue: data1[key], currentValue: data2[key] }];
+    return [...acc, {
+      key,
+      type: 'updated',
+      oldValue: data1[key],
+      currentValue: data2[key],
+    }];
   }, []);
 };
 
-export default (pathToFile1, pathToFile2) => {
+export default (pathToFile1, pathToFile2, outputFormat) => {
   if (!pathToFile1 || !pathToFile2) {
     return '';
   }
@@ -32,5 +37,5 @@ export default (pathToFile1, pathToFile2) => {
   const dataObj1 = parse(path.extname(pathToFile1).toLowerCase(), dataString1);
   const dataObj2 = parse(path.extname(pathToFile2).toLowerCase(), dataString2);
   const diff = getDiffAst(dataObj1, dataObj2);
-  return render(diff);
+  return render(outputFormat, diff);
 };
