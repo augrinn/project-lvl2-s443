@@ -17,7 +17,7 @@ const stringifyValue = (value, depth) => {
 const renders = {
   removed: (node, indent, depth) => `${indent}- ${node.key}: ${stringifyValue(node.currentValue, depth + 1)}`,
   added: (node, indent, depth) => `${indent}+ ${node.key}: ${stringifyValue(node.currentValue, depth + 1)}`,
-  complex: (node, indent, depth) => `${indent}  ${node.key}: ${render(node.children, depth + 1)}`,
+  complex: (node, indent, depth, renderMethod) => `${indent}  ${node.key}: ${renderMethod(node.children, depth + 1)}`,
   unchanged: (node, indent, depth) => `${indent}  ${node.key}: ${stringifyValue(node.currentValue, depth + 1)}`,
   updated: (node, indent, depth) => [`${indent}- ${node.key}: ${stringifyValue(node.oldValue, depth + 1)}`,
     `${indent}+ ${node.key}: ${stringifyValue(node.currentValue, depth + 1)}`],
@@ -26,7 +26,7 @@ const renders = {
 const render = (diff, depth = 0) => {
   const indent = ' '.repeat(depth * lengthIndent + depth * lengthPrefix + lengthIndent);
   const indentBeforeBracket = ' '.repeat(depth * lengthIndentBeforeBracket);
-  const result = _.flatten(diff.map(node => renders[node.type](node, indent, depth)));
+  const result = _.flatten(diff.map(node => renders[node.type](node, indent, depth, render)));
   return `{\n${result.join('\n')}\n${indentBeforeBracket}}`;
 };
 

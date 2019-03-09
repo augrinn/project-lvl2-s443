@@ -12,7 +12,10 @@ test.each([
     ['before.ini', 'after.ini', 'tree', 'expected.txt'],
     ['before.json', 'after.json', 'plain', 'expectedPlain.txt'], 
     ['before.yml', 'after.yml', 'plain', 'expectedPlain.txt'], 
-    ['before.ini', 'after.ini', 'plain', 'expectedPlain.txt'],    
+    ['before.ini', 'after.ini', 'plain', 'expectedPlain.txt'],
+    ['before.json', 'after.json', 'json', 'expectedJson.txt'],
+    ['before.yml', 'after.yml', 'json', 'expectedJson.txt'],
+    ['before.ini', 'after.ini', 'json', 'expectedJson.txt'],
   ])(
   "getDiff(%s, %s, %s) should return not ''",
   (pathToFileBefore, pathToFileAfter, outputFormat, pathToFileExpected) => {
@@ -21,5 +24,6 @@ test.each([
     const fullPathToFileAfter = `./__tests__/__fixtures__/${pathToFileAfter}`;
     const diff = getDiff(fullPathToFileBefore, fullPathToFileAfter, outputFormat);
     expect(diff).toBe(expected);
+    
   },
 );
