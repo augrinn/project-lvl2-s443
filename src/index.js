@@ -2,7 +2,7 @@ import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
 import parse from './parsers';
-import render from './renders';
+import render from './renderers';
 
 const getDiffAst = (data1, data2) => {
   const keys = _.union(Object.keys(data1), Object.keys(data2)).sort();

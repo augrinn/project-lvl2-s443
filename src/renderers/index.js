@@ -1,9 +1,9 @@
-import defaultRender from './defaultRender';
+import treeRender from './treeRender';
 import plainRender from './plaintRender';
 
 const renders = {
-  default: diff => defaultRender(diff),
-  plain: diff => plainRender(diff),
+  tree: treeRender,
+  plain: plainRender,
 };
 
 export default (outputFormat, diff) => renders[outputFormat](diff);

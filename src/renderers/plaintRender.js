@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define */
 import _ from 'lodash';
 
 const stringifyValue = (value) => {
@@ -18,6 +17,11 @@ const renders = {
   updated: (node, keys) => `Property '${keys.join('.')}' was updated. From ${stringifyValue(node.oldValue)} to ${stringifyValue(node.currentValue)}`,
 };
 
-const render = (diff, keys = []) => diff.filter(node => node.type !== 'unchanged').map(node => renders[node.type](node, [...keys, node.key])).join('\n');
+const render = (diff, keys = []) => {
+  const result = diff
+    .filter(node => node.type !== 'unchanged')
+    .map(node => renders[node.type](node, [...keys, node.key]));
+  return result.join('\n');
+};
 
 export default render;

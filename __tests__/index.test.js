@@ -7,12 +7,12 @@ test("getDiff() should return ''", () => {
 });
 
 test.each([
-    ['before.json', 'after.json', 'default', 'expected.txt'], 
-    ['before.yml', 'after.yml', 'default', 'expected.txt'], 
-    ['before.ini', 'after.ini', 'default', 'expected.txt'],
+    ['before.json', 'after.json', 'tree', 'expected.txt'], 
+    ['before.yml', 'after.yml', 'tree', 'expected.txt'], 
+    ['before.ini', 'after.ini', 'tree', 'expected.txt'],
     ['before.json', 'after.json', 'plain', 'expectedPlain.txt'], 
     ['before.yml', 'after.yml', 'plain', 'expectedPlain.txt'], 
-    ['before.ini', 'after.ini', 'plain', 'expectedPlain.txt'],
+    ['before.ini', 'after.ini', 'plain', 'expectedPlain.txt'],    
   ])(
   "getDiff(%s, %s, %s) should return not ''",
   (pathToFileBefore, pathToFileAfter, outputFormat, pathToFileExpected) => {
